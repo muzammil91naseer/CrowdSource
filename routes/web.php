@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/register_admin', function () {
+    return view('auth/register_admin');
+});
+
+Route::get('/register_judge', function () {
+    return view('auth/register_judge');
+});
+
 
 
 
