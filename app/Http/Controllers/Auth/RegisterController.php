@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\one_time_registration_links;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -67,8 +69,6 @@ class RegisterController extends Controller
        
         if(array_key_exists("is_admin",$data))
         {
-            info("admin");
-            info($data);
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -79,8 +79,6 @@ class RegisterController extends Controller
         }
         else if(array_key_exists("is_judge",$data))
         {
-            info("judge");
-            info($data);
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -91,8 +89,6 @@ class RegisterController extends Controller
         }
         else
         {
-            info("else");
-            info($data);
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -101,5 +97,48 @@ class RegisterController extends Controller
 
         }
         
+    }
+
+    public function generate_one_time_registration_link($data)
+    {
+        info($data);
+        $uniqid = Str::random(9);
+        $base_url = env("BASE_URL", "default");
+        if(array_key_exists("admin_or_judge",$data))
+        {
+            if($data["admin_or_judge"]=="Admin")
+            {
+                $url=$base_url+'/register_admin'+"?token="+$uniqid;
+                one_time_registration_links::create(
+                [
+                    'token' => $uniqid,
+                    'is_expired' => '0',
+                ]);
+                return view('auth/generate_link')->withUrl($url);
+
+            }else if($data["admin_or_judge"]=="Judge")
+            {
+                $url=$base_url+'/register_judge'+"?token="+$uniqid;
+                one_time_registration_links::create(
+                [
+                    'token' => $uniqid,
+                    'is_expired' => '0',
+                ]);
+                return view('auth/generate_link')->withUrl($url);
+
+            }else
+            {
+                $url="Registration link could not be generated";
+                return view('auth/generate_link')->withUrl($url);
+            }
+            
+        
+            
+        }
+        
+        
+
+        
+
     }
 }
