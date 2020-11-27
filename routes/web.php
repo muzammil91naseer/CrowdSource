@@ -35,7 +35,7 @@ Route::get('admin/one_time_register_link', function ()
     return view('auth/one_time_register_link');
 });
 
-Route::get('admin/generate_link', function (Request $request)
+Route::post('admin/generate_link', function (Request $request)
 {
     $data=$request;
     $uniqid = Str::random(12);
@@ -58,7 +58,7 @@ Route::get('admin/generate_link', function (Request $request)
                 
                 return view('auth/generate_link',["url" => $url]);
 
-            }else
+            }else if($data['admin_judge']=="admin")
             {
                 $url=$base_url.'register_admin'."?token=".$uniqid;
                 info($url);

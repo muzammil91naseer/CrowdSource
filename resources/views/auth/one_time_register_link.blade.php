@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Generate One Time Registration Links') }}</div>
 
                 <div class="card-body">
-                    <form method="GET" action='/startup_competition/public/admin/generate_link'>
+                    <form method="POST" action='/startup_competition/public/admin/generate_link'>
                         @csrf
                         
                         <div>
