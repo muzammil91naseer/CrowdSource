@@ -90,3 +90,12 @@ Route::post('admin/generate_link', function (Request $request)
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/explore/investment_opportunities', [App\Http\Controllers\NavbarController::class,'investment_opportunities'])->name('investment_opportunities');
+
+Route::get('/explore/investing', [App\Http\Controllers\NavbarController::class,'investing'])->name('investing');
+
+Route::get('/explore/raising', [App\Http\Controllers\NavbarController::class,'raising'])->name('raising');
+
+Route::get('/explore/about_us', [App\Http\Controllers\NavbarController::class,'about_us'])->name('about_us');
+
+

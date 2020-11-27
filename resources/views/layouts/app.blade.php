@@ -38,8 +38,26 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        
                         @guest
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('investment_opportunities') }}">{{ __('Investment Opportunities') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('investing') }}">{{ __('Investing') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('raising') }}">{{ __('Raising') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('about_us') }}">{{ __('About Us') }}</a>
+                        </li>
+                        
+                        <!-- Authentication Links -->
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
