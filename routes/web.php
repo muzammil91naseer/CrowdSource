@@ -52,4 +52,8 @@ Route::get('/explore/about_us', [App\Http\Controllers\NavbarController::class,'a
 
 Route::post('/admin/generate_link', [App\Http\Controllers\Auth\RegisterController::class, 'generate_link'])->name('generate_link');
 
+Route::get('/user_details_view', [App\Http\Controllers\UserDetailsController::class,'get_user_details_view'])->name('get_user_details_view');
+
+Route::post('/insert_user_details', [App\Http\Controllers\UserDetailsController::class,'insert_user_details'])->name('insert_user_details');
+
 
