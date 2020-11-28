@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Exceptions\TokenNotFound;
+use App\Exceptions\TokenExpired;
+use App\Exceptions\InvalidRegistrationToken;
 
 class RegisterController extends Controller
 {
@@ -50,6 +54,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -65,37 +70,107 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+
+    protected function validate_token(array $data)
     {
-       
-        if(array_key_exists("is_admin",$data))
+        if(array_key_exists("token",$data))
         {
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'is_admin' => $data['is_admin'],
-            ]);
+            $row = one_time_registration_links::where('token', '=', $data["token"])->first();
+            if($row)
+            {
+                if($row["is_expired"]==0)
+                {
+                    $mytime = Carbon::now();
+                    $current_time=$mytime->toDateTimeString();
+                    $current_timestamp = Carbon::now()->timestamp;
+                    $created_at=$row["created_at"];
+                    $created_at_timestamp = Carbon::createFromFormat('Y-m-d H:i:s' , $created_at,'Asia/Hong_Kong')->timestamp;
+                    $delta = 86400;// 24 hours
+                    
+                    if($current_timestamp-$created_at_timestamp>$delta)
+                    {
+                        //token is more than 24 hours old
+                        
+                        throw new TokenExpired('Token Expired ' . $data["token"]);
+                    }
+                    else
+                    {
+                        // token is valid
+                        return true;
 
-        }
-        else if(array_key_exists("is_judge",$data))
-        {
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'is_judge' => $data['is_judge'],
-            ]);
+                    }
+                }
+                else
+                {
+                    throw new TokenExpired('Token Expired ' . $data["token"]);
+                }
 
+            }
+            else
+            {
+                throw new InvalidRegistrationToken('Registration Token is not valid');
+            }
+            
         }
         else
         {
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ]);
+            throw new TokenNotFound('Token Not Found');
+        }
+        
+       
+    }
 
+    protected function create(array $data)
+    {
+        info($data);
+        $valid_token=$this->validate_token($data);
+        info("valid_token");
+        info($valid_token);
+        if($valid_token==1)
+        {
+            if(array_key_exists("is_admin",$data))
+            {
+                $mytime = Carbon::now();
+                $current_time=$mytime->toDateTimeString();
+                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                return User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'is_admin' => $data['is_admin'],
+                ]);
+
+            }
+            else if(array_key_exists("is_judge",$data))
+            {
+                info("inserting judge data");
+                $mytime = Carbon::now();
+                $current_time=$mytime->toDateTimeString();
+                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                return User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'is_judge' => $data['is_judge'],
+                ]);
+
+            }
+            else
+            {
+                $mytime = Carbon::now();
+                $current_time=$mytime->toDateTimeString();
+                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                return User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                ]);
+
+            }
+        }
+        else
+        {
+            return null;
         }
         
     }

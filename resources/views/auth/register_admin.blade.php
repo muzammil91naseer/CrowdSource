@@ -54,6 +54,7 @@
                         </div>
                         
                         {{ Form::hidden('is_admin', '1') }}
+                        {{ Form::hidden('token', $request["token"]) }}
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>

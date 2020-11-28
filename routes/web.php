@@ -15,19 +15,23 @@ use App\Models\one_time_registration_links;
 */
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () 
+Route::get('/', function (Request $message) 
 {
-    return view('home');
-});
+    if(!isset($message["message"]))
+    {
+        $message["message"]="";
+    }
+    return view('home',["message"=>$message["message"]]);
+})->name('home_page');
 
-Route::get('/register_admin', function () 
+Route::get('/register_admin', function (Request $request) 
 {
-    return view('auth/register_admin');
+    return view('auth/register_admin',["request" => $request]);
 })->name('register_admin');
 
-Route::get('/register_judge', function () 
+Route::get('/register_judge', function (Request $request) 
 {
-    return view('auth/register_judge');
+    return view('auth/register_judge',["request" => $request]);
 })->name('register_judge');
 
 Route::get('/admin/one_time_register_link', function () 

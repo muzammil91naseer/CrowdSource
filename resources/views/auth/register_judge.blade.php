@@ -26,6 +26,7 @@
                         </div>
 
                         {{ Form::hidden('is_judge', '1') }}
+                        {{ Form::hidden('token', $request["token"]) }}
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
