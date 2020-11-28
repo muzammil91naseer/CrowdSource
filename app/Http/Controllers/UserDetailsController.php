@@ -43,5 +43,7 @@ class UserDetailsController extends Controller
             'registered_to_raise_funds' => $registered_to_raise_funds,
         ]);
 
+        return redirect()->route('home_page');
+
     }
 }
