@@ -56,6 +56,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('about_us') }}">{{ __('About Us') }}</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('add_project_view') }}">{{ __('Add New Project') }}</a>
+                        </li>
                         @guest
                         <!-- Authentication Links -->
                             @if (Route::has('login'))
