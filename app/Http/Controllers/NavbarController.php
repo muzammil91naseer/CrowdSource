@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\projects;
 
 class NavbarController extends Controller
 {
     public function investment_opportunities()
     {
-        // data array will be filled with investment opportunities information
-        $data=array();
-        return view('explore/investment_opportunities',["data" => $data]);
+        $projects_all = projects::paginate(12);
+        $projects_all_array=$projects_all->toArray();
+        return view('home',["message"=>"","projects_all"=>$projects_all,"projects_all_array"=>$projects_all_array]);
+
     }
 
     public function investing()

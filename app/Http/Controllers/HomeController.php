@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\user_details;
+use App\Models\projects;
 use Monarobase\CountryList\CountryListFacade;
 
 class HomeController extends Controller
@@ -31,14 +32,14 @@ class HomeController extends Controller
         info($row);
         if(isset($row))
         {
-            return view('home');
+            $projects_all = projects::paginate(12);
+            $projects_all_array=$projects_all->toArray();
+            return view('home',["message"=>"","projects_all"=>$projects_all,"projects_all_array"=>$projects_all_array]);
+
         }
         else
         {
-            $countries=CountryListFacade::getList("en");
-            //return view("user_details",compact("countries"));
             return redirect()->route('get_user_details_view');
-
         }     
         
     }

@@ -123,55 +123,71 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         info($data);
-        $valid_token=$this->validate_token($data);
-        info("valid_token");
-        info($valid_token);
-        if($valid_token==1)
+        if(!isset ($data["is_admin"]) && !isset($data["is_judge"]))
         {
-            if(array_key_exists("is_admin",$data))
-            {
-                $mytime = Carbon::now();
-                $current_time=$mytime->toDateTimeString();
-                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
-                return User::create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                    'is_admin' => $data['is_admin'],
-                ]);
+            // applicant registration without registration token
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
 
-            }
-            else if(array_key_exists("is_judge",$data))
-            {
-                info("inserting judge data");
-                $mytime = Carbon::now();
-                $current_time=$mytime->toDateTimeString();
-                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
-                return User::create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                    'is_judge' => $data['is_judge'],
-                ]);
-
-            }
-            else
-            {
-                $mytime = Carbon::now();
-                $current_time=$mytime->toDateTimeString();
-                one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
-                return User::create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                ]);
-
-            }
         }
         else
         {
-            return null;
+            $valid_token=$this->validate_token($data);
+            info("valid_token");
+            info($valid_token);
+            if($valid_token==1)
+            {
+                if(array_key_exists("is_admin",$data))
+                {
+                    $mytime = Carbon::now();
+                    $current_time=$mytime->toDateTimeString();
+                    one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                    return User::create([
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'password' => Hash::make($data['password']),
+                        'is_admin' => $data['is_admin'],
+                    ]);
+    
+                }
+                else if(array_key_exists("is_judge",$data))
+                {
+                    info("inserting judge data");
+                    $mytime = Carbon::now();
+                    $current_time=$mytime->toDateTimeString();
+                    one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                    return User::create([
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'password' => Hash::make($data['password']),
+                        'is_judge' => $data['is_judge'],
+                    ]);
+    
+                }
+                else
+                {
+                    $mytime = Carbon::now();
+                    $current_time=$mytime->toDateTimeString();
+                    one_time_registration_links::where('token',$data["token"])->update(['is_expired'=>1,'registered_at'=>$current_time]);
+                    return User::create([
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'password' => Hash::make($data['password']),
+                    ]);
+    
+                }
+            }
+            else
+            {
+                return null;
+            }
+
         }
+
+       
         
     }
 

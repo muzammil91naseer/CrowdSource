@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\one_time_registration_links;
+use App\Models\projects;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,11 @@ Route::get('/', function (Request $message)
     {
         $message["message"]="";
     }
-    return view('home',["message"=>$message["message"]]);
+    $projects_all = projects::paginate(12);
+    $projects_all_array=$projects_all->toArray();
+    info($projects_all);
+    info($projects_all_array);
+    return view('home',["message"=>$message["message"],"projects_all"=>$projects_all,"projects_all_array"=>$projects_all_array]);
 })->name('home_page');
 
 Route::get('/register_admin', function (Request $request) 
@@ -52,8 +57,11 @@ Route::get('/explore/about_us', [App\Http\Controllers\NavbarController::class,'a
 
 Route::post('/admin/generate_link', [App\Http\Controllers\Auth\RegisterController::class, 'generate_link'])->name('generate_link');
 
-Route::get('/user_details_view', [App\Http\Controllers\UserDetailsController::class,'get_user_details_view'])->name('get_user_details_view');
+Route::get('/user_details_view', [App\Http\Controllers\UserDetailsController::class,'get_user_details_view'])->name('get_user_details_view')->middleware('auth');
 
-Route::post('/insert_user_details', [App\Http\Controllers\UserDetailsController::class,'insert_user_details'])->name('insert_user_details');
+Route::post('/insert_user_details', [App\Http\Controllers\UserDetailsController::class,'insert_user_details'])->name('insert_user_details')->middleware('auth');
 
+Route::get('/add_project_view', [App\Http\Controllers\ProjectsController::class,'add_project_view'])->name('add_project_view')->middleware('auth');
+
+Route::post('/add_project', [App\Http\Controllers\ProjectsController::class,'add_project'])->name('add_project')->middleware('auth');
 
