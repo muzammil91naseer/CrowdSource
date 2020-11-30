@@ -9,6 +9,19 @@ use Carbon\Carbon;
 
 class ProjectsController extends Controller
 {
+    public function project_details_view(Request $request)
+    {
+        if(isset($request["project_id"]))
+        {
+            $project_data = projects::where('id', '=', $request["project_id"])->first();
+            return view("project_details",["project_data"=>$project_data]);
+        }
+        else
+        {
+            abort(404);
+        }
+        
+    }
     public function add_project_view()
     {
         return view("add_project");
@@ -18,6 +31,8 @@ class ProjectsController extends Controller
     {
         info($request);
         $cover_photo_url="";
+        $cover_photo_large_url="";
+        $cover_photo_medium_url="";
         $profile_photo_url="";
         $team_photo_url="";
         $mytime = Carbon::now();
@@ -38,9 +53,43 @@ class ProjectsController extends Controller
                 $extension = $request->cover_photo->extension();
                 $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-cover_photo-".$current_timestamp.".".$extension);
-                $cover_photo_url=$url;
+                $cover_photo_url=$base_url.$url;
                 info("cover photo url");
                 info($cover_photo_url);
+            }
+        }
+        if ($request->hasFile('cover_photo_large')) 
+        {
+            if ($request->file('cover_photo_large')->isValid()) 
+            {
+                $validated = $request->validate
+                (
+                    [
+                        'name' => 'string|max:40',
+                        'image' => 'mimes:jpeg,png|max:1014',
+                    ]
+                );
+                $extension = $request->cover_photo->extension();
+                $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo_large-".$current_timestamp.".".$extension);
+                $url = Storage::url($validated['name']."-cover_photo_large-".$current_timestamp.".".$extension);
+                $cover_photo_large_url=$base_url.$url;
+            }
+        }
+        if ($request->hasFile('cover_photo_medium')) 
+        {
+            if ($request->file('cover_photo_medium')->isValid()) 
+            {
+                $validated = $request->validate
+                (
+                    [
+                        'name' => 'string|max:40',
+                        'image' => 'mimes:jpeg,png|max:1014',
+                    ]
+                );
+                $extension = $request->cover_photo->extension();
+                $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo_medium-".$current_timestamp.".".$extension);
+                $url = Storage::url($validated['name']."-cover_photo_medium-".$current_timestamp.".".$extension);
+                $cover_photo_medium_url=$base_url.$url;
             }
         }
         if ($request->hasFile('profile_photo')) 
@@ -56,7 +105,7 @@ class ProjectsController extends Controller
                 $extension = $request->profile_photo->extension();
                 $request->profile_photo->storeAs('/public', $validated['name']."-profile_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-profile_photo-".$current_timestamp.".".$extension);
-                $profile_photo_url=$url;;
+                $profile_photo_url=$base_url.$url;
                 info("profile photo url");
                 info($profile_photo_url);
             }
@@ -73,7 +122,7 @@ class ProjectsController extends Controller
                 $extension = $request->team_photo->extension();
                 $request->team_photo->storeAs('/public', $validated['name']."-team_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-team_photo-".$current_timestamp.".".$extension);
-                $team_photo_url=$url;;
+                $team_photo_url=$base_url.$url;
             }
         }
 
@@ -82,6 +131,8 @@ class ProjectsController extends Controller
             [
             'name' => $request['name'],
             'cover_photo_url' => $cover_photo_url,
+            'cover_photo_large_url' => $cover_photo_large_url,
+            'cover_photo_medium_url' => $cover_photo_medium_url,
             'profile_photo_url' => $profile_photo_url,
             'team_photo_url' => $team_photo_url,
             'idea_video_url' => $request["idea_video_url"],

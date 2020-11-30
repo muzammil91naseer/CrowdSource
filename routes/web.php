@@ -24,8 +24,6 @@ Route::get('/', function (Request $message)
     }
     $projects_all = projects::paginate(12);
     $projects_all_array=$projects_all->toArray();
-    info($projects_all);
-    info($projects_all_array);
     return view('home',["message"=>$message["message"],"projects_all"=>$projects_all,"projects_all_array"=>$projects_all_array]);
 })->name('home_page');
 
@@ -65,3 +63,4 @@ Route::get('/add_project_view', [App\Http\Controllers\ProjectsController::class,
 
 Route::post('/add_project', [App\Http\Controllers\ProjectsController::class,'add_project'])->name('add_project')->middleware('auth');
 
+Route::get('/project_details', [App\Http\Controllers\ProjectsController::class,'project_details_view'])->name('project_details');

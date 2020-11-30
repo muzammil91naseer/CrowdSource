@@ -107,9 +107,21 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="cover_photo" class="col-md-4 col-form-label text-md-right">Choose Cover Photo</label>
+                            <label for="cover_photo" class="col-md-4 col-form-label text-md-right">Choose Small Cover Photo</label>
                             <div class="col-md-6">
                                 <input id="cover_photo" type="file" name="cover_photo">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cover_photo_large" class="col-md-4 col-form-label text-md-right">Choose Large Cover Photo</label>
+                            <div class="col-md-6">
+                                <input id="cover_photo_large" type="file" name="cover_photo_large">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cover_photo_medium" class="col-md-4 col-form-label text-md-right">Choose Medium Cover Photo</label>
+                            <div class="col-md-6">
+                                <input id="cover_photo_medium" type="file" name="cover_photo_medium">
                             </div>
                         </div>
 
