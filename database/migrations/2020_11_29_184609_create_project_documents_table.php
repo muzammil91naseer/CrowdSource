@@ -16,7 +16,7 @@ class CreateProjectDocumentsTable extends Migration
         Schema::create('project_documents', function (Blueprint $table) {
             $table->id();
             $table->integer("project_id");
-            $table->string("name")->nullable;
+            $table->string("name")->nullable();
             $table->string("url");
             $table->boolean("is_public")->default(false);
             $table->timestamps();

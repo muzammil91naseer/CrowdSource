@@ -74,6 +74,14 @@
                                 <input id="share_price" type="text" class="form-control" name="share_price">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="investors" class="col-md-4 col-form-label text-md-right">{{ __('Total Investors') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="investors" type="text" class="form-control" name="investors">
+                            </div>
+                        </div>
                         
                         <div class="form-group row">
                             <label for="idea" class="col-md-4 col-form-label text-md-right">{{ __('Idea') }}</label>

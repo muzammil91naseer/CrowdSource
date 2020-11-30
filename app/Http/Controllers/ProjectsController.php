@@ -151,5 +151,7 @@ class ProjectsController extends Controller
             ]
         );
 
+        return redirect()->route('home_page');
+
     }
 }
