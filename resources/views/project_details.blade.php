@@ -2,12 +2,7 @@
 
 @section('content')
 <div class="container">
-    
-    <div class="card-header">
-        <h2 style="font-size: 1.375rem;">{{ __('Project Details') }}</h2>
-    </div>
-
-    <div class="card-body">
+    <div class="card-body" style="padding : 0px !important;">
         <div style="    left: 0px; min-width: 100%; min-height: 375px; background-image: url('{{$project_data["cover_photo_large_url"]}}');background-repeat: no-repeat;background-size: cover; position:absolute;  background-position: center; opacity:1;">
             <div class="row" style="margin: 0 auto; max-width: 75rem; width=100%; padding: 0; box-sizing: inherit; display: block;">
                                 
@@ -15,8 +10,6 @@
                   
             </div>
         </div>
-        {{$project_data}}
-    </div>      
-                
+    </div>                 
 </div>
 @endsection

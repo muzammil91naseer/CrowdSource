@@ -13,7 +13,7 @@
                             </div>       
                         @endif
                     @endif
-                    <div class="card-header">
+                    <div class="card-header row justify-content-center">
                         <h2 style="font-size: 1.375rem;">{{ __('Investment opportunities') }}</h2>
                     </div>
 
@@ -22,6 +22,7 @@
                             <div class="row" style="margin-left: 0px !important; margin-right: 0px !important">
                                 @foreach($chunk as $project)
                                     <div class="col" style="max-width: 33.33% !important;">
+                                        <a href={{ route('project_details', ['project_id'=>$project['id']]) }}>
                                         <div class="row" style="border-radius: 15px 15px 0px 0px; min-height: 168px; background-image: url('{{$project["cover_photo_url"]}}');width: 100%;background-repeat: no-repeat;background-size: cover; position:relative; padding:0.625 rem;background-position: center; opacity:1;">
                                         </div>
                                         <div class="row" style="margin-bottom: 0.6rem; padding:0.3125rem 0.625rem; position:relative;">
@@ -59,7 +60,9 @@
                                                 <p>Investors</p>
                                             </div>
                                         </div>
+                                    </a>
                                     </div>
+                                
                                     
                                 @endforeach
                             </div>
