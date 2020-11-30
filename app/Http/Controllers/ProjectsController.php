@@ -47,7 +47,7 @@ class ProjectsController extends Controller
                 (
                     [
                         'name' => 'string|max:40',
-                        'image' => 'mimes:jpeg,png|max:1014',
+                        'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
                 $extension = $request->cover_photo->extension();
@@ -66,7 +66,7 @@ class ProjectsController extends Controller
                 (
                     [
                         'name' => 'string|max:40',
-                        'image' => 'mimes:jpeg,png|max:1014',
+                        'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
                 $extension = $request->cover_photo->extension();
@@ -83,7 +83,7 @@ class ProjectsController extends Controller
                 (
                     [
                         'name' => 'string|max:40',
-                        'image' => 'mimes:jpeg,png|max:1014',
+                        'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
                 $extension = $request->cover_photo->extension();
@@ -100,7 +100,7 @@ class ProjectsController extends Controller
                 $validated = $request->validate
                 ([
                     'name' => 'string|max:40',
-                    'image' => 'mimes:jpeg,png|max:1014',
+                    'image' => 'mimes:jpeg,png,jpg|max:1014',
                 ]);
                 $extension = $request->profile_photo->extension();
                 $request->profile_photo->storeAs('/public', $validated['name']."-profile_photo-".$current_timestamp.".".$extension);
@@ -117,7 +117,7 @@ class ProjectsController extends Controller
                 //
                 $validated = $request->validate([
                     'name' => 'string|max:40',
-                    'image' => 'mimes:jpeg,png|max:1014',
+                    'image' => 'mimes:jpeg,png,jpg|max:1014',
                 ]);
                 $extension = $request->team_photo->extension();
                 $request->team_photo->storeAs('/public', $validated['name']."-team_photo-".$current_timestamp.".".$extension);
