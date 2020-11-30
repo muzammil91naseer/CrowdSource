@@ -76,10 +76,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="investors" class="col-md-4 col-form-label text-md-right">{{ __('Total Investors') }}</label>
+                            <label for="total_investors" class="col-md-4 col-form-label text-md-right">{{ __('Total Investors') }}</label>
 
                             <div class="col-md-6">
-                                <input id="investors" type="text" class="form-control" name="investors">
+                                <input id="total_investors" type="text" class="form-control" name="total_investors">
                             </div>
                         </div>
                         

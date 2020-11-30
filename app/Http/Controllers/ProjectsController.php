@@ -14,7 +14,15 @@ class ProjectsController extends Controller
         if(isset($request["project_id"]))
         {
             $project_data = projects::where('id', '=', $request["project_id"])->first();
-            return view("project_details",["project_data"=>$project_data]);
+            if(isset($project_data))
+            {
+                return view("project_details",["project_data"=>$project_data]);
+            }
+            else
+            {
+                abort(404);  
+            }
+            
         }
         else
         {
@@ -130,7 +138,7 @@ class ProjectsController extends Controller
                 $team_photo_url=$base_url.$url;
             }
         }
-
+        info($request);
         projects::create
         (
             [
@@ -151,7 +159,7 @@ class ProjectsController extends Controller
             'idea'=>$request['idea'],
             'team'=>$request['team'],
             'campaign_end_date' => $request['campaign_end_date'],
-            'total_investors '=>$request['total_investors '],
+            'total_investors'=>$request['total_investors'],
             
             ]
         );
