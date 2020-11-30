@@ -52,7 +52,7 @@
                         </div>
                     
                         <div class="form-group row">
-                            <label for="equity_percentage" class="col-md-4 col-form-label text-md-right">{{ __('Equit Percentage') }}</label>
+                            <label for="equity_percentage" class="col-md-4 col-form-label text-md-right">{{ __('Equity Percentage') }}</label>
 
                             <div class="col-md-6">
                                 <input id="equity_percentage" type="text" class="form-control" name="equity_percentage">
