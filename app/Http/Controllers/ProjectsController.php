@@ -50,6 +50,7 @@ class ProjectsController extends Controller
                         'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
+                $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->cover_photo->extension();
                 $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-cover_photo-".$current_timestamp.".".$extension);
@@ -69,6 +70,7 @@ class ProjectsController extends Controller
                         'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
+                $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->cover_photo->extension();
                 $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo_large-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-cover_photo_large-".$current_timestamp.".".$extension);
@@ -86,6 +88,7 @@ class ProjectsController extends Controller
                         'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
+                $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->cover_photo->extension();
                 $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo_medium-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-cover_photo_medium-".$current_timestamp.".".$extension);
@@ -102,6 +105,7 @@ class ProjectsController extends Controller
                     'name' => 'string|max:40',
                     'image' => 'mimes:jpeg,png,jpg|max:1014',
                 ]);
+                $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->profile_photo->extension();
                 $request->profile_photo->storeAs('/public', $validated['name']."-profile_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-profile_photo-".$current_timestamp.".".$extension);
@@ -119,6 +123,7 @@ class ProjectsController extends Controller
                     'name' => 'string|max:40',
                     'image' => 'mimes:jpeg,png,jpg|max:1014',
                 ]);
+                $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->team_photo->extension();
                 $request->team_photo->storeAs('/public', $validated['name']."-team_photo-".$current_timestamp.".".$extension);
                 $url = Storage::url($validated['name']."-team_photo-".$current_timestamp.".".$extension);
