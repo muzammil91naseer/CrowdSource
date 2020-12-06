@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\projects;
+use App\Models\team_members;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
@@ -14,21 +15,31 @@ class ProjectsController extends Controller
         if(isset($request["project_id"]))
         {
             $project_data = projects::where('id', '=', $request["project_id"])->first();
-            if(isset($project_data))
+            $team_members_obj = team_members::where('project_id', '=', $request["project_id"])->get();
+            $team_members_array=$team_members_obj->toArray();
+            if(isset($project_data) && isset($team_members_array))
             {
-                return view("project_details",["project_data"=>$project_data]);
+                return view("project_details",["project_data"=>$project_data,"team_members"=>$team_members_array]);
+            }
+            else if (isset($project_data))
+            {
+                return view("project_details",["project_data"=>$project_data,"team_members"=>""]);
+            }
+            else if (isset($team_members_array))
+            {
+                return view("project_details",["project_data"=>"","team_members"=>$team_members_array]);
             }
             else
             {
-                abort(404);  
+                abort(404);
             }
-            
+
         }
         else
         {
             abort(404);
         }
-        
+
     }
     public function add_project_view()
     {
@@ -47,9 +58,9 @@ class ProjectsController extends Controller
         $current_time=$mytime->toDateTimeString();
         $current_timestamp = Carbon::now()->timestamp;
         $base_url= env("BASE_URL", " ");
-        if ($request->hasFile('cover_photo')) 
+        if ($request->hasFile('cover_photo'))
         {
-            if ($request->file('cover_photo')->isValid()) 
+            if ($request->file('cover_photo')->isValid())
             {
                 $validated = $request->validate
                 (
@@ -67,9 +78,9 @@ class ProjectsController extends Controller
                 info($cover_photo_url);
             }
         }
-        if ($request->hasFile('cover_photo_large')) 
+        if ($request->hasFile('cover_photo_large'))
         {
-            if ($request->file('cover_photo_large')->isValid()) 
+            if ($request->file('cover_photo_large')->isValid())
             {
                 $validated = $request->validate
                 (
@@ -85,9 +96,9 @@ class ProjectsController extends Controller
                 $cover_photo_large_url=$base_url.$url;
             }
         }
-        if ($request->hasFile('cover_photo_medium')) 
+        if ($request->hasFile('cover_photo_medium'))
         {
-            if ($request->file('cover_photo_medium')->isValid()) 
+            if ($request->file('cover_photo_medium')->isValid())
             {
                 $validated = $request->validate
                 (
@@ -103,9 +114,9 @@ class ProjectsController extends Controller
                 $cover_photo_medium_url=$base_url.$url;
             }
         }
-        if ($request->hasFile('profile_photo')) 
+        if ($request->hasFile('profile_photo'))
         {
-            if ($request->file('profile_photo')->isValid()) 
+            if ($request->file('profile_photo')->isValid())
             {
                 //
                 $validated = $request->validate
@@ -122,9 +133,9 @@ class ProjectsController extends Controller
                 info($profile_photo_url);
             }
         }
-        if ($request->hasFile('team_photo')) 
+        if ($request->hasFile('team_photo'))
         {
-            if ($request->file('team_photo')->isValid()) 
+            if ($request->file('team_photo')->isValid())
             {
                 //
                 $validated = $request->validate([
@@ -160,7 +171,7 @@ class ProjectsController extends Controller
             'team'=>$request['team'],
             'campaign_end_date' => $request['campaign_end_date'],
             'total_investors'=>$request['total_investors'],
-            
+
             ]
         );
 

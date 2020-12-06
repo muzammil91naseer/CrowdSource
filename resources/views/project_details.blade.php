@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row" style="min-width:100% !important;">
-        <div class="col" style="padding : 0px !important; margin:0px !important; min-width:100% !important;">>
+        <div class="col" style="padding : 0px !important; margin:0px !important; min-width:100% !important;">
             <div class="row "; style="left:0px; min-width: 100%; min-height: 375px; background-image: url('{{$project_data["cover_photo_large_url"]}}');background-repeat: no-repeat;background-size: cover; position:relative;  background-position: center; opacity:1;">
                 <div class="col">
 
@@ -102,26 +102,34 @@
                                 </p>
                             </div>
                             <div class="row no-gutters">
+                                @if (isset($project_data["website"]))
                                 <div class="col-md-1" >
                                     <a href="{{$project_data['website']}}">
                                             <img style="height: 1.5em !important; width: 1.5em;" src="http://localhost/startup_competition/storage/app/public/icons/globe-icon.png">
                                     </a>
                                 </div>
+                                @endif
+                                @if (isset($project_data["facebook"]))
                                 <div class="col-md-1" >
                                     <a href="{{$project_data['facebook']}}">
                                         <img style="height: 1.5em !important; width: 1.5em;" src="http://localhost/startup_competition/storage/app/public/icons/facebook-icon.png">
                                     </a>
                                 </div>
+                                @endif
+                                @if (isset($project_data["twitter"]))
                                 <div class="col-md-1" >
                                     <a href="{{$project_data['twitter']}}">
                                         <img style="height: 1.5em !important; width: 1.5em;" src="http://localhost/startup_competition/storage/app/public/icons/twitter-icon.png">
                                     </a>
                                 </div>
+                                @endif
+                                @if (isset($project_data["instagram"]))
                                 <div class="col-md-1" >
                                     <a href="{{$project_data['instagram']}}">
                                         <img style="height: 1.5em !important; width: 1.5em;" src="http://localhost/startup_competition/storage/app/public/icons/instagram-icon.png">
                                     </a>
                                 </div>
+                                @endif
                                 <div class="col-md-8">
                                 </div>
                             </div>
@@ -144,6 +152,82 @@
                                 </ul>
                         </div>
 
+                    </div>
+                    <div class="row no-gutters" style="border-top: 2px solid #e4e4e4; margin-top: 20px;">
+                        <div class="col">
+                            <div class="row no-gutters">
+                                <h2 style="font-weight: 700;"> Idea </h2>
+                            </div>
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <p style="font-size: 0.7rem !important; font-weight: 400 !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important;">
+                                        {{$project_data["idea"]}}
+                                    </p>
+                                </div>
+                                <div class="col" style="margin-left:2% !important;">
+                                    <iframe title="idea_video" src={{$project_data['idea_video_url']}} width="533.34" height="300" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters" style="border-top: 2px solid #e4e4e4; margin-top: 20px;">
+                        <div class="col">
+                            <div class="row no-gutters">
+                                <h2 style="font-weight: 700;"> Team </h2>
+                            </div>
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                                            @foreach ($team_members as $key => $value)
+                                                <li data-target="#carouselExampleCaptions" data-slide-to={{$key+1}}></li>
+                                            @endforeach
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src={{$project_data["team_photo_url"]}} class="d-block w-100" alt="...">
+                                            </div>
+                                            @foreach ($team_members as $key => $value)
+                                                <div class="carousel-item">
+                                                    <img src={{$value["photo_url"]}} class="d-block w-100" alt="...">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h5>{{$value['name']}}</h5>
+                                                     </div>
+                                                </div>
+                                            @endforeach
+
+
+                                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col" style="margin-left:2% !important;">
+                                    <p style="font-size: 0.7rem !important; font-weight: 400 !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important;">
+                                        {{$project_data["team"]}}
+                                    </p>
+                                    @foreach ($team_members as $key => $value)
+                                        <span style="font-size: 0.7rem !important; font-weight: 700 !important; line-height: 1.5 !important;">
+                                            {{$value["name"]." , ".$value["designation"]}}
+                                        </span>
+                                        <p style="font-size: 0.7rem !important; font-weight: 400 !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important;">
+                                            {{$value["description"]}}
+                                        </p>
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>{{-- End Column width:80% --}}
 
