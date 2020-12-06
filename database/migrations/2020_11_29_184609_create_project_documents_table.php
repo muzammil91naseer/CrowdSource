@@ -17,8 +17,8 @@ class CreateProjectDocumentsTable extends Migration
             $table->id();
             $table->integer("project_id");
             $table->string("name")->nullable();
-            $table->string("url");
-            $table->boolean("is_public")->default(false);
+            $table->string("url")->nullable();
+            $table->boolean("is_public")->default(true);
             $table->timestamps();
         });
     }

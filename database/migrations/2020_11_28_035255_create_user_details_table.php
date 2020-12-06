@@ -16,6 +16,7 @@ class CreateUserDetailsTable extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id")->unique();
+            $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('country')->nullable();
             $table->string('state')->nullable();
@@ -27,7 +28,9 @@ class CreateUserDetailsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('investor_category')->nullable();
             $table->boolean('registered_to_raise_funds')->nullable();
+            $table->boolean('registered_to_invest')->nullable();
             $table->timestamps();
+
         });
     }
 

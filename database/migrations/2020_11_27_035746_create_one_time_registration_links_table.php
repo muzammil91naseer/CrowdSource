@@ -13,7 +13,7 @@ class CreateOneTimeRegistrationLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('one_time_registration_links', function (Blueprint $table) 
+        Schema::create('one_time_registration_links', function (Blueprint $table)
         {
             $table->id();
             $table->string('token');
