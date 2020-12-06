@@ -18,7 +18,7 @@
                                 <input id="name" type="text" class="form-control" name="name">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
@@ -50,7 +50,7 @@
                                 <input id="target_amount" type="text" class="form-control" name="target_amount">
                             </div>
                         </div>
-                    
+
                         <div class="form-group row">
                             <label for="equity_percentage" class="col-md-4 col-form-label text-md-right">{{ __('Equity Percentage') }}</label>
 
@@ -66,7 +66,7 @@
                                 <input id="pre_monthly_valuation" type="text" class="form-control" name="pre_monthly_valuation">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="share_price" class="col-md-4 col-form-label text-md-right">{{ __('Share Price') }}</label>
 
@@ -82,7 +82,7 @@
                                 <input id="total_investors" type="text" class="form-control" name="total_investors">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="idea" class="col-md-4 col-form-label text-md-right">{{ __('Idea') }}</label>
 
@@ -113,14 +113,14 @@
                                 <input id="idea_video_url" type="text" name="idea_video_url">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="cover_photo" class="col-md-4 col-form-label text-md-right">Choose Small Cover Photo</label>
                             <div class="col-md-6">
                                 <input id="cover_photo" type="file" name="cover_photo">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="cover_photo_medium" class="col-md-4 col-form-label text-md-right">Choose Medium Cover Photo</label>
                             <div class="col-md-6">
@@ -134,7 +134,7 @@
                                 <input id="cover_photo_large" type="file" name="cover_photo_large">
                             </div>
                         </div>
-                        
+
 
                         <div class="form-group row">
                             <label for="profile_photo" class="col-md-4 col-form-label text-md-right">Choose Profile Photo</label>
@@ -153,12 +153,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
+                                    {{ __('Next') }}
                                 </button>
                             </div>
                         </div>
 
-                        
+
 
                     </form>
                 </div>

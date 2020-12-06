@@ -16,7 +16,7 @@ use App\Models\projects;
 */
 Auth::routes(['verify' => true]);
 
-Route::get('/', function (Request $message) 
+Route::get('/', function (Request $message)
 {
     if(!isset($message["message"]))
     {
@@ -27,17 +27,17 @@ Route::get('/', function (Request $message)
     return view('home',["message"=>$message["message"],"projects_all"=>$projects_all,"projects_all_array"=>$projects_all_array]);
 })->name('home_page');
 
-Route::get('/register_admin', function (Request $request) 
+Route::get('/register_admin', function (Request $request)
 {
     return view('auth/register_admin',["request" => $request]);
 })->name('register_admin');
 
-Route::get('/register_judge', function (Request $request) 
+Route::get('/register_judge', function (Request $request)
 {
     return view('auth/register_judge',["request" => $request]);
 })->name('register_judge');
 
-Route::get('/admin/one_time_register_link', function () 
+Route::get('/admin/one_time_register_link', function ()
 {
     return view('auth/one_time_register_link');
 })->name('one_time_register_link');
@@ -64,3 +64,7 @@ Route::get('/add_project_view', [App\Http\Controllers\ProjectsController::class,
 Route::post('/add_project', [App\Http\Controllers\ProjectsController::class,'add_project'])->name('add_project')->middleware('auth');
 
 Route::get('/project_details', [App\Http\Controllers\ProjectsController::class,'project_details_view'])->name('project_details');
+
+Route::get('/add_team_members_view', [App\Http\Controllers\ProjectsController::class,'add_team_members_view'])->name('add_team_members_view')->middleware('auth');
+
+Route::post('/add_team_members', [App\Http\Controllers\ProjectsController::class,'add_team_members'])->name('add_team_members')->middleware('auth');

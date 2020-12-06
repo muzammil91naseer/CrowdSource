@@ -18,8 +18,8 @@ class CreateTeamMembersTable extends Migration
             $table->integer("project_id");
             $table->string("name")->nullable();
             $table->string("designation")->nullable();
-            $table->string("description")->nullable();
-            $table->string("photo_url")->nullable();
+            $table->text("description")->nullable();
+            $table->text("photo_url")->nullable();
             $table->timestamps();
         });
     }

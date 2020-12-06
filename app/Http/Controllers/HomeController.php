@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
+
         $this->middleware(['auth','verified']);
     }
 
@@ -40,7 +40,7 @@ class HomeController extends Controller
         else
         {
             return redirect()->route('get_user_details_view');
-        }     
-        
+        }
+
     }
 }
