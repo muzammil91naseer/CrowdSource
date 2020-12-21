@@ -8,7 +8,7 @@
 </p>
 <h1> ## About CrowdSource </h1>
 
-CrowdSource is laravel based crowd sourcing platform develped as a hobby project.
+CrowdSource is laravel based crowd sourcing platform developed as a hobby project.
 
 ## About Laravel
 
