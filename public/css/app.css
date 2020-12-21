@@ -3403,12 +3403,12 @@ input[type=button].btn-block {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 0.9rem;
-  color: #fff;
+  color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #343a40;
+  background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #343a40;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
 
@@ -3577,18 +3577,18 @@ input[type=button].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color:  #e9ecef;
+  color: #212529;
   text-align: inherit;
   white-space: nowrap;
-  background-color: #343a40;
+  background-color: transparent;
   border: 0;
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  color: #e9ecef;
+  color: #16181b;
   text-decoration: none;
-  background-color: #343a40;
+  background-color: #f8f9fa;
 }
 
 .dropdown-item.active,
@@ -10901,5 +10901,33 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+/*!
+ * Hover.css (http://ianlunn.github.io/Hover/)
+ * Version: 2.3.2
+ * Author: Ian Lunn @IanLunn
+ * Author URL: http://ianlunn.co.uk/
+ * Github: https://github.com/IanLunn/Hover
+
+ * Hover.css Copyright Ian Lunn 2017. Generated with Sass.
+ */
+
+/* Grow Shadow */
+
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+
+.hvr-grow-shadow:hover,
+.hvr-grow-shadow:focus,
+.hvr-grow-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
 }
 
