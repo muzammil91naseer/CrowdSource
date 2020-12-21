@@ -23,15 +23,17 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="textarea" class="form-control" name="description">
+
+                                <textarea class="form-control" id="description" rows="5" name="description"></textarea>
+
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="features" class="col-md-4 col-form-label text-md-right">{{ __('Features (; seperated list)') }}</label>
+                            <label for="features" class="col-md-4 col-form-label text-md-right">{{ __('Features (List elements seperated by ";")') }}</label>
 
                             <div class="col-md-6">
-                                <input id="features" type="textarea" class="form-control" name="features">
+                                <textarea class="form-control" id="features" rows="5" name="features"></textarea>
                             </div>
                         </div>
 
@@ -84,18 +86,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="idea" class="col-md-4 col-form-label text-md-right">{{ __('Idea') }}</label>
+                            <label for="idea" class="col-md-4 col-form-label text-md-right">{{ __('Idea Description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="idea" type="textarea" class="form-control" name="idea">
+
+                                <textarea class="form-control" id="idea" rows="5" name="idea"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team') }}</label>
+                            <label for="team" class="col-md-4 col-form-label text-md-right">{{ __('Team Description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="team" type="textarea" class="form-control" name="team">
+                                <textarea class="form-control" id="team" rows="5" name="team"></textarea>
                             </div>
                         </div>
 
