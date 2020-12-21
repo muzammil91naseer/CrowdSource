@@ -15,9 +15,9 @@
                 <h1 style="font-size: 1.375rem; font-weight: bold;">{{ __('Investment opportunities') }}</h1>
             </div>
             @foreach(array_chunk($projects_all_array["data"], 3) as $chunk)
-                <div class="row justify-content-center">
+                <div class="row">
                     @foreach($chunk as $project)
-                        <div class="col-sm hvr-grow-shadow px-0" style="border: 1px solid #e4e4e4; border-radius: 15px 15px 15px 15px;  margin:1% !important">
+                        <div class="col hvr-grow-shadow px-0" style="max-width: 33.3% !important; border: 1px solid #e4e4e4; border-radius: 15px 15px 15px 15px;  margin:1% !important">
                             <a href={{ route('project_details', ['project_id'=>$project['id']]) }} style="text-decoration: none; color: #212529;">
                             <div class="row no-gutters" style=" border-radius: 15px 15px 0px 0px; min-height: 168px; background-image: url('{{$project["cover_photo_url"]}}');width: 100%;background-repeat: no-repeat;background-size: cover; position:relative; background-position: center; opacity:1;">
                             </div>

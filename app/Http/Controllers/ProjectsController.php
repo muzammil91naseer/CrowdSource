@@ -51,8 +51,41 @@ class ProjectsController extends Controller
         return view("add_team_members",["request"=>$request]);
     }
 
+    public function add_project_media_view(Request $request)
+    {
+        return view("add_project_media",["request"=>$request]);
+    }
+
+
     public function add_project(Request $request)
     {
+        $project_id=projects::create
+        (
+            [
+                'name' => $request['name'],
+                'description' => $request['description'],
+                'features' => $request['features'],
+                'raised_amount'=> $request['raised_amount'],
+                'target_amount' => $request['target_amount'],
+                'equity_percentage' => $request['equity_percentage'],
+                'pre_monthly_valuation' => $request['pre_monthly_valuation'],
+                'share_price' => $request['share_price'],
+                'idea'=>$request['idea'],
+                'team'=>$request['team'],
+                'campaign_end_date' => $request['campaign_end_date'],
+                'total_investors'=>$request['total_investors'],
+
+            ]
+        )->id;
+
+        return redirect()->route('add_project_media_view', ['project_id'=>$project_id,"name"=>$request['name']]);
+
+    }
+
+    public function add_project_media(Request $request)
+    {
+        $project_id=$request->project_id;
+        $name=$request->name;
         $cover_photo_url="";
         $cover_photo_large_url="";
         $cover_photo_medium_url="";
@@ -62,6 +95,7 @@ class ProjectsController extends Controller
         $current_time=$mytime->toDateTimeString();
         $current_timestamp = Carbon::now()->timestamp;
         $base_url= env("BASE_URL", " ");
+        info($request);
         if ($request->hasFile('cover_photo'))
         {
             if ($request->file('cover_photo')->isValid())
@@ -73,6 +107,7 @@ class ProjectsController extends Controller
                         'image' => 'mimes:jpeg,png,jpg|max:1014',
                     ]
                 );
+                info($validated);
                 $validated['name'] = preg_replace('/\s+/', '_', $validated['name']);
                 $extension = $request->cover_photo->extension();
                 $request->cover_photo->storeAs('/public', $validated['name']."-cover_photo-".$current_timestamp.".".$extension);
@@ -150,30 +185,15 @@ class ProjectsController extends Controller
             }
         }
 
-        $project_id=projects::create
-        (
-            [
-            'name' => $request['name'],
+        projects::where('id',$project_id)->update
+        ([
             'cover_photo_url' => $cover_photo_url,
             'cover_photo_large_url' => $cover_photo_large_url,
             'cover_photo_medium_url' => $cover_photo_medium_url,
             'profile_photo_url' => $profile_photo_url,
             'team_photo_url' => $team_photo_url,
             'idea_video_url' => $request["idea_video_url"],
-            'description' => $request['description'],
-            'features' => $request['features'],
-            'raised_amount'=> $request['raised_amount'],
-            'target_amount' => $request['target_amount'],
-            'equity_percentage' => $request['equity_percentage'],
-            'pre_monthly_valuation' => $request['pre_monthly_valuation'],
-            'share_price' => $request['share_price'],
-            'idea'=>$request['idea'],
-            'team'=>$request['team'],
-            'campaign_end_date' => $request['campaign_end_date'],
-            'total_investors'=>$request['total_investors'],
-
-            ]
-        )->id;
+        ]);
 
         return redirect()->route('add_team_members_view', ['project_id'=>$project_id,"count"=>1]);
 
@@ -209,7 +229,7 @@ class ProjectsController extends Controller
 
         if(isset($request["count"]))
         {
-            $count=(int)$request["count"];
+            $count=intval($request["count"]);
             $count++;
         }
         else

@@ -68,3 +68,9 @@ Route::get('/project_details', [App\Http\Controllers\ProjectsController::class,'
 Route::get('/add_team_members_view', [App\Http\Controllers\ProjectsController::class,'add_team_members_view'])->name('add_team_members_view')->middleware('auth');
 
 Route::post('/add_team_members', [App\Http\Controllers\ProjectsController::class,'add_team_members'])->name('add_team_members')->middleware('auth');
+
+#add_project_media_view
+
+Route::get('/add_project_media_view', [App\Http\Controllers\ProjectsController::class,'add_project_media_view'])->name('add_project_media_view')->middleware('auth');
+
+Route::post('/add_project_media', [App\Http\Controllers\ProjectsController::class,'add_project_media'])->name('add_project_media')->middleware('auth');
