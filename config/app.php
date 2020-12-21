@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Startup Competition'),
+    'name' => env('APP_NAME', 'CrowdSource'),
 
     /*
     |--------------------------------------------------------------------------
