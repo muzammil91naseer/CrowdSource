@@ -1,3 +1,8 @@
+<h1> ## About CrowdSource </h1>
+
+CrowdSource is laravel based crowd sourcing platform developed as a hobby project.
+
+
 ##Instructions for local setup
 <ul>
 <li>  Git clone (into htdocs of xampp)
@@ -15,9 +20,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-<h1> ## About CrowdSource </h1>
-
-CrowdSource is laravel based crowd sourcing platform developed as a hobby project.
 
 
 ## About Laravel
