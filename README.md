@@ -10,6 +10,14 @@
 
 CrowdSource is laravel based crowd sourcing platform developed as a hobby project.
 
+##Instructions for local setup
+<ul>
+<li>  Git clone (into htdocs of xampp)
+<li>  make local empty database
+<li>  Update database credentials in .env file
+<li>  php artisan migrate
+<li>  Go to localhost/your_project_directory/public.
+</ul>
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
